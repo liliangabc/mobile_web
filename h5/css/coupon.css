@@ -1,0 +1,152 @@
+.clearfix:after{
+    clear:both;
+    content:"";
+    display: block;
+}
+.container{
+    margin-bottom: 0;
+}
+.header{
+    background: url(../img/coupon/img@2x.png) no-repeat 0 bottom;
+    background-size: 100% 28rem;
+    height:25rem;
+    padding-top: 2rem;
+}
+.red-box{
+    background: url(../img/coupon/youhuiquan@2x.png) no-repeat 50% 0;
+    background-size: 100% 100%;
+    width:24rem;
+    height: 18rem;
+    margin:0 auto 1rem auto;
+    padding:2.5rem .4rem 6.68rem .4rem;
+}
+.red-box table{
+    width: 100%;
+    height: 100%;
+}
+.red-box td:nth-child(1){
+    width:7.8rem;
+    text-align: center;
+}
+.red-box td:nth-child(1) span{
+    color: rgb(237,23,64);
+    font-size: 2rem;
+}
+.red-box td:nth-child(1) span b{
+    font-size: 1rem;
+}
+.red-box td:nth-child(2){
+    padding-left:3em;
+}
+.red-box td h2{
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    margin-left:-1rem;
+}
+.red-box td ul li{
+    list-style-type: disc;
+    line-height: 1.8em;
+    font-size: .8rem;
+}
+.div-rule{
+    text-align: center;
+}
+.div-rule .link-rule{
+    background: url(../img/coupon/shape_right.png) no-repeat right 40%;
+    background-size: auto 1.4rem;
+    line-height: 2rem;
+    padding-right: 1.4rem;
+    color: #FEFFAC;
+    font-size: 1rem;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.text-box{
+    padding: 0 1.4rem;
+    text-align: center;
+}
+.text-box .p1{
+    font-size: 1.1rem;
+    border-bottom: 1px solid #999;
+    padding: 1.6em 0;
+    margin-bottom: .8em;
+}
+.text-box .p1 strong{
+    color: rgb(237,23,64);
+    font-weight: normal;
+}
+.text-box .p2{
+    padding:0 .2em;
+    line-height: 1.8em;
+    font-size: .9rem;
+}
+.text-box .p2 b{
+    color:rgb(59,139,220);
+    font-weight:normal;
+}
+.text-box .btn-down{
+    background: url(../img/coupon/xiazai@2x.png) no-repeat 50% 50%;
+    background-size: 21rem 4.5rem;
+    width: 20rem;
+    height: 3rem;
+    margin: 2rem 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    transition:opacity .1s;
+}
+.text-box .btn-down:active{
+    opacity: .8;
+}
+.text-box .footer{
+    background: url(../img/coupon/xiaduan@2x.png) no-repeat 50% 0;
+    background-size: 14.5rem 100%;
+    height: 3.7rem;
+}
+.shade{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background: rgba(0,0,0,.8);
+}
+.introduct-box{
+    position: fixed;
+    top: 0;
+    right:-22rem;
+    width: 22rem;
+    z-index: 1;
+    background: #fff;
+    padding: 1.4rem 1.4rem 0 1.8rem;
+    transform: translate3d(0,0,0);
+}
+.introduct-box.right0{
+    right: 0;
+    transition:right .5s ease;
+}
+.introduct-box.right-hide{
+    right: -22rem;
+    transition:right .5s ease;
+}
+.introduct-box dt{
+    margin-bottom: 1em;
+    position: relative;
+    left: -1.2em;
+}
+.introduct-box dd{
+    margin-bottom: 1.4rem;
+}
+.introduct-box h2{
+    font-size: 1.1rem;
+    background: url(../img/coupon/juxing@2x.png) no-repeat 0 50%;
+    background-size: auto 100%;
+    padding-left: 1em;
+    color: #3B8DDF;
+}
+.introduct-box p{
+    font-size: .9rem;
+    line-height: 1.2em;
+    margin-bottom: .8em;
+}
+.introduct-box p strong{
+    color: #3B8DDF;
+    font-weight: normal;
+}

@@ -1,0 +1,209 @@
+/************************** 全局 ************************* */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+span {
+    display: inline-block;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+body img {
+    max-width: 100%;
+}
+
+.clear {
+    clear: both;
+}
+
+.hide {
+    display: none !important;
+}
+
+.container {
+    width: 100%;
+    margin-bottom: 4rem;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+}
+
+footer a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@media screen and (max-width:359px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width:360px) and (max-width:479px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+@media screen and (min-width:480px) and (max-width:767px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:1024px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+i.fa {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+i.fa-commenting {
+    background-image: url(../img/icon/guanzhu_btn@2x.png);
+}
+
+i.fa-user-plus {
+    background-image: url(../img/icon/yuetan_btn@2x.png);
+}
+
+.dynamic i.fa {
+    width: 100%;
+    height: 100%;
+    background-size: auto auto;
+    background-position: 50% 50%;
+}
+
+i.fa-share {
+    background-image: url(../img/icon/share.png);
+}
+
+i.fa-comment {
+    background-image: url(../img/icon/comment.png);
+}
+
+i.fa-heart {
+    background-image: url(../img/icon/heart.png);
+}
+
+.shade-div {
+    background: #eee url(../img/loading2.gif) no-repeat 50% 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1002;
+}
+
+.container.loading {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+
+img {
+    background-image: url(../img/avator.png);
+    background-size: 100% 100%;
+}
+/* APP下载条 */
+.downloadbox {
+    width: 100%;
+    height: 3.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgb(236, 236, 236);
+    padding: 0 .8rem 0 1.2rem;
+}
+
+.downloadbox td:nth-child(1) {
+    width: 4rem;
+}
+
+.downloadbox td:nth-child(3) {
+    text-align: right;
+}
+
+.downloadbox .image {
+    width: 3rem;
+    height: 3rem;
+    background: #fff;
+    border-radius: .6rem;
+}
+
+.downloadbox .image img {
+    width: 100%;
+    height: 100%;
+}
+
+.downloadbox a {
+    padding: .5rem .7rem;
+    background: #353535;
+    border-radius: .6rem;
+    color: #fff;
+}
+
+.downloadbox h2 {
+    font-size: .9rem;
+    color: #353535;
+    margin-bottom: .3rem;
+}
+
+.downloadbox p {
+    line-height: 1.2rem;
+}
+
+.downloadbox p i {
+    color: rgb(232, 145, 2);
+    display: block;
+    width: 1.1rem;
+    height: 1.1rem;
+    background: url(../img/icon/xing.png) no-repeat 50% 50%;
+    background-size: 100% 100%;
+    float: left;
+}
+
+.downloadbox p strong {
+    color: rgb(118, 118, 118);
+    font-size: .8rem;
+    font-weight: normal;
+}

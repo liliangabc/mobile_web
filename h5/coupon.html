@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <title>领取优惠券</title>
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" href="css/coupon.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="red-box clearfix">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>
+                            <span><b>￥</b>20</span>
+                        </td>
+                        <td>
+                            <h2>20元代金券</h2>
+                            <ul>
+                                <li>购买任何产品均可使用</li>
+                                <li>2016/05/21至2016/06/06</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="div-rule">
+                <a class="link-rule">优惠券规则</a>
+            </div>
+        </div>
+        <div class="text-box">
+            <p class="p1">
+                恭喜！成功抢到了
+                <strong>￥20</strong> 优惠券
+            </p>
+            <p class="p2">
+                优惠券已放至账户<b>150****0730</b>，登陆青创汇APP即可使用<br>（若手机号尚未注册，请在7天内完成注册）
+            </p>
+            <a class="btn-down"></a>
+            <div class="footer"></div>
+        </div>
+    </div>
+    <div class="introduct-box right-hide">
+        <dl>
+            <dt><h2>优惠券介绍</h2></dt>
+            <dd>
+                <p>优惠券是青创汇向会员提供的一种支付抵用券或单次使用体验券，用于线上订单支付现金抵扣或直接体验某项线下服务，抵扣规则以青创汇各平台实时发布为准。优惠券在青创汇平台内使用时，等价于等值人民币。</p>
+            </dd>
+            <dt><h2>优惠券分类</h2></dt>
+            <dd>
+                <p><strong>抵扣券：</strong>用于青创汇线下场地使用、课程活动报名支付时的现金抵扣。</p>
+                <p><strong>代用券：</strong>即单次空间使用体验券，空间包括智库厅、移动办公室、沙龙厅、资金厅、人才厅、梦想演播厅。</p>
+                <p><strong>随机折扣券：</strong>凭折扣券可享受线上支付8-8.5折优惠。</p>
+            </dd>
+            <dt><h2>使用规则</h2></dt>
+            <dd>
+                <p>同一订单仅能享受一次优惠。</p>
+            </dd>
+            <dt><h2>获取途径</h2></dt>
+            <dd>
+                <p>1、优惠券可通过参加青创汇各平台相关活动赢取，也可通过青创汇APP积分兑换获得。</p>
+                <p>2、邀请好友：邀请朋友注册青创汇APP，新用户注册成功并完善资料后，邀请人可获得20元抵扣券一张。</p>
+                <p>3、青创汇APP的新用户注册可立即获得20元抵扣券一张。</p>
+            </dd>
+        </dl>
+    </div>
+    <div class="shade hide"></div>
+
+    <script>
+        var obj={
+            initBox:function(){
+                this.shadeBox=document.getElementsByClassName('shade')[0];
+                this.introductBox=document.getElementsByClassName('introduct-box')[0];
+                this.linkRule=document.getElementsByClassName('link-rule')[0];
+                this.introductBoxWidth=parseInt(getComputedStyle(this.introductBox).width);
+                this.shadeBox.style.height=this.introductBox.style.height=document.body.scrollHeight+'px';
+                var that=this;
+                this.linkRule.onclick=function(){
+                    that.shadeBox.classList.remove('hide');
+                    that.introductBox.style.right='';
+                    that.introductBox.classList.remove('right-hide');
+                    that.introductBox.classList.add('right0');
+                };
+                this.shadeBox.onclick=function(){
+                    this.classList.add('hide');
+                    that.introductBox.style.right='';
+                    that.introductBox.classList.add('right-hide');
+                    that.introductBox.classList.remove('right0');
+                };
+                this.introductBox.addEventListener('touchstart',function(e){
+                    e.preventDefault();
+                    clearTimeout(that.tid);
+                    this.classList.remove('right-hide');
+                    that.shadeBox.classList.remove('hide');
+                    var touch=e.targetTouches[0];
+                    that.startTime=Date.now();
+                    that.startX=touch.clientX;
+                },false);
+                this.introductBox.addEventListener('touchmove',function(e){
+                    e.preventDefault();
+                    this.classList.contains('right0')&&this.classList.remove('right0');
+                    var touch=e.targetTouches[0];
+                    that.endX=touch.clientX;
+                    var s=that.endX-that.startX;
+                    if(s<=0){
+                        this.style.right='0px';
+                        return;
+                    }
+                    this.style.right=-s+'px';
+                },false);
+                this.introductBox.addEventListener('touchend',function(e){
+                    e.preventDefault();
+                    clearTimeout(that.tid);
+                    var countTime=Date.now()-that.startTime;
+                    var s=that.endX-that.startX;
+                    var w=that.introductBoxWidth;
+                    if((s>=w/2)|(countTime<200&&s>=w/8)){
+                        this.classList.add('right-hide');
+                        this.style.right=-w+'px';
+                        that.tid=setTimeout(function(){
+                            that.shadeBox.classList.add('hide');
+                        },300)
+                    }else{
+                        this.classList.add('right0');
+                        this.style.right='0px';
+                    }
+                },false);
+            }
+        }
+        document.addEventListener('DOMContentLoaded',obj.initBox.bind(obj),false);
+    </script>
+</body>
+
+</html>
