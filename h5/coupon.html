@@ -108,11 +108,7 @@
                     var touch=e.targetTouches[0];
                     that.endX=touch.clientX;
                     var s=that.endX-that.startX;
-                    if(s<=0){
-                        this.style.right='0px';
-                        return;
-                    }
-                    this.style.right=-s+'px';
+                    this.style.right=(s<=0?0:-s)+'px';
                 },false);
                 this.introductBox.addEventListener('touchend',function(e){
                     e.preventDefault();
@@ -125,7 +121,7 @@
                         this.style.right=-w+'px';
                         that.tid=setTimeout(function(){
                             that.shadeBox.classList.add('hide');
-                        },300)
+                        },250)
                     }else{
                         this.classList.add('right0');
                         this.style.right='0px';
