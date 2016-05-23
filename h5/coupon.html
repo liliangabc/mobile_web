@@ -46,7 +46,7 @@
             <div class="footer"></div>
         </div>
     </div>
-    <div class="introduct-box right-hide">
+    <div class="introduct-box">
         <dl>
             <dt><h2>优惠券介绍</h2></dt>
             <dd>
@@ -71,66 +71,7 @@
         </dl>
     </div>
     <div class="shade hide"></div>
-
-    <script>
-        var obj={
-            initBox:function(){
-                this.shadeBox=document.getElementsByClassName('shade')[0];
-                this.introductBox=document.getElementsByClassName('introduct-box')[0];
-                this.linkRule=document.getElementsByClassName('link-rule')[0];
-                this.introductBoxWidth=parseInt(getComputedStyle(this.introductBox).width);
-                this.shadeBox.style.height=this.introductBox.style.height=document.body.scrollHeight+'px';
-                var that=this;
-                this.linkRule.onclick=function(){
-                    that.shadeBox.classList.remove('hide');
-                    that.introductBox.style.right='';
-                    that.introductBox.classList.remove('right-hide');
-                    that.introductBox.classList.add('right0');
-                };
-                this.shadeBox.onclick=function(){
-                    this.classList.add('hide');
-                    that.introductBox.style.right='';
-                    that.introductBox.classList.add('right-hide');
-                    that.introductBox.classList.remove('right0');
-                };
-                this.introductBox.addEventListener('touchstart',function(e){
-                    e.preventDefault();
-                    clearTimeout(that.tid);
-                    this.classList.remove('right-hide');
-                    that.shadeBox.classList.remove('hide');
-                    var touch=e.targetTouches[0];
-                    that.startTime=Date.now();
-                    that.startX=touch.clientX;
-                },false);
-                this.introductBox.addEventListener('touchmove',function(e){
-                    e.preventDefault();
-                    this.classList.contains('right0')&&this.classList.remove('right0');
-                    var touch=e.targetTouches[0];
-                    that.endX=touch.clientX;
-                    var s=that.endX-that.startX;
-                    this.style.right=(s<=0?0:-s)+'px';
-                },false);
-                this.introductBox.addEventListener('touchend',function(e){
-                    e.preventDefault();
-                    clearTimeout(that.tid);
-                    var countTime=Date.now()-that.startTime;
-                    var s=that.endX-that.startX;
-                    var w=that.introductBoxWidth;
-                    if((s>=w/2)|(countTime<200&&s>=w/8)){
-                        this.classList.add('right-hide');
-                        this.style.right=-w+'px';
-                        that.tid=setTimeout(function(){
-                            that.shadeBox.classList.add('hide');
-                        },250)
-                    }else{
-                        this.classList.add('right0');
-                        this.style.right='0px';
-                    }
-                },false);
-            }
-        }
-        document.addEventListener('DOMContentLoaded',obj.initBox.bind(obj),false);
-    </script>
+    <script src="js/coupon.js"></script>
 </body>
 
 </html>

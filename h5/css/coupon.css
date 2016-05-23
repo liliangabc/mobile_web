@@ -1,8 +1,3 @@
-.clearfix:after{
-    clear:both;
-    content:"";
-    display: block;
-}
 .container{
     margin-bottom: 0;
 }
@@ -98,8 +93,9 @@
 }
 .text-box .footer{
     background: url(../img/coupon/xiaduan@2x.png) no-repeat 50% 0;
-    background-size: 14.5rem 100%;
-    height: 3.7rem;
+    background-size: 14.5rem auto;
+    height: 2rem;
+    margin-bottom: .6rem;
 }
 .shade{
     width: 100%;
@@ -117,15 +113,6 @@
     z-index: 1;
     background: #fff;
     padding: 1.4rem 1.4rem 0 1.8rem;
-    transform: translate3d(0,0,0);
-}
-.introduct-box.right0{
-    right: 0;
-    transition:right .5s ease;
-}
-.introduct-box.right-hide{
-    right: -22rem;
-    transition:right .5s ease;
 }
 .introduct-box dt{
     margin-bottom: 1em;
