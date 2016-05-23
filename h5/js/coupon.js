@@ -6,12 +6,37 @@ var obj = {
         this.introductBoxWidth = parseInt(getComputedStyle(this.introductBox).width);
         this.shadeBox.style.height = this.introductBox.style.height = document.documentElement.clientHeight + 'px';
         var that = this;
-        this.linkRule.onclick = function () {
-            clearTimeout(that.tid);
-            cancelAnimationFrame(that.aniFrame);
-            that.shadeBox.classList.remove('hide');
-            that.toLeft(that.introductBox, -that.introductBoxWidth, 0, 20);
-        };
+        // this.linkRule.onclick = function () {
+        //     clearTimeout(that.tid);
+        //     cancelAnimationFrame(that.aniFrame);
+        //     that.shadeBox.classList.remove('hide');
+        //     that.toLeft(that.introductBox, -that.introductBoxWidth, 0, 20);
+        // };
+        this.linkRule.addEventListener('touchstart', function (e) {
+            e.preventDefault();
+            var touch = e.targetTouches[0];
+            this.endX = this.startX = touch.clientX;
+            this.endY = this.startY = touch.clientY;
+        })
+        this.linkRule.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+            var touch = e.targetTouches[0];
+            this.endX = touch.clientX;
+            this.endY = touch.clientY;
+        })
+        this.linkRule.addEventListener('touchend', function (e) {
+            e.preventDefault();
+            this.endX = this.endX;
+            this.endY = this.endY;
+            var x = Math.abs(this.endX - this.startX);
+            var y = Math.abs(this.endY - this.startY);
+            if (x <= 5 && y <= 5) {
+                clearTimeout(that.tid);
+                cancelAnimationFrame(that.aniFrame);
+                that.shadeBox.classList.remove('hide');
+                that.toLeft(that.introductBox, -that.introductBoxWidth, 0, 20);
+            }
+        })
         this.shadeBox.addEventListener('touchstart', function (e) {
             e.preventDefault();
             clearTimeout(that.tid);
