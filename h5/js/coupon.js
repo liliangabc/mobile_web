@@ -26,8 +26,6 @@ var obj = {
         })
         this.linkRule.addEventListener('touchend', function (e) {
             e.preventDefault();
-            this.endX = this.endX;
-            this.endY = this.endY;
             var x = Math.abs(this.endX - this.startX);
             var y = Math.abs(this.endY - this.startY);
             if (x <= 5 && y <= 5) {
