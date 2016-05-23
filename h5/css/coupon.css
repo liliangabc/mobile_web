@@ -113,6 +113,7 @@
     z-index: 1;
     background: #fff;
     padding: 1.4rem 1.4rem 0 1.8rem;
+    transform: translate3d(0,0,0);
 }
 .introduct-box dt{
     margin-bottom: 1em;
