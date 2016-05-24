@@ -11,12 +11,10 @@
 </head>
 
 <body>
-    <img src="img/lottery/shan.png" id="shan-img" style="display:none;" />
-    <img src="img/lottery/sorry.png" id="sorry-img" style="display:none;" />
-    <div class="banner">
-        <div class="turnplate" style="background-image:url(img/lottery/turnplate-bg.png);background-size:100% 100%;">
-            <canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
-            <img class="pointer" src="img/lottery/turnplate-pointer.png" />
+    <div class="container">
+        <div id="turnplate">
+            <canvas></canvas>
+            <div class="pointer"></div>
         </div>
     </div>
     <div class="tipbox">
@@ -25,6 +23,10 @@
         <a class="ok">确定</a>
     </div>
     <div class="shade"></div>
+    <div style="display:none;">
+        <img src="img/lottery/shan.png" id="shan-img" />
+        <img src="img/lottery/sorry.png" id="sorry-img" />
+    </div>
     <script src="js/stats.min.js"></script>
     <script src="js/lottery2.js"></script>
 </body>

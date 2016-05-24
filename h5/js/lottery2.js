@@ -1,33 +1,41 @@
 var turnplate = {
     init: function () {
+        // 奖品列表
         this.restaraunts = ["50M免费流量包", "10闪币", "谢谢参与", "5闪币", "10M免费流量包", "20M免费流量包", "20闪币 ", "30M免费流量包"];
-        this.parent=document.getElementsByClassName('turnplate')[0];
-        this.canvas = document.getElementById('wheelcanvas');
-        this.pointer = this.parent.getElementsByClassName('pointer')[0];
+        // 外层父元素
+        this.parent = document.getElementById('turnplate');
+        var w = parseInt(getComputedStyle(this.parent).width);
+        this.parent.style.height = w + 'px';
+        // 画布和上下文
+        this.canvas = this.parent.getElementsByTagName('canvas')[0];
         this.ctx = this.canvas.getContext("2d");
-        this.cW = this.canvas.width// = window.innerWidth * .9;
-        this.cH = this.canvas.height //= window.innerHeight * .9;
-        // this.outsideRadius = this.cW * .8;
-        // this.textRadius = this.outsideRadius * .8;
-        // this.insideRadius = this.textRadius * .4;
-        this.outsideRadius = 192;
-        this.textRadius = 155;
-        this.insideRadius = 68;
+        this.cH = this.cW = this.canvas.height = this.canvas.width = w;
+        // 指针
+        this.pointer = this.parent.getElementsByClassName('pointer')[0];
+        // 外圆
+        this.outsideRadius = this.cW / 2 - 5;
+        // 文本绘制的半径
+        this.textRadius = this.outsideRadius * .8;
+        // 内圆
+        this.insideRadius = parseInt(getComputedStyle(this.pointer).width) / 2;
+        // 开始角度
         this.startAngle = 0;
+        // 是否在旋转
         this.bRotate = false;
+        // 绘制圆盘
         this.draw();
         var that = this;
+        // 指针点击
         this.pointer.addEventListener('click', function () {
-            that.rotate(null, oTipBox.show);
+            that.rotate(null, oTipBox.show.bind(oTipBox));
         }, false);
     },
     draw: function () {
-        //根据奖品个数计算圆周角度
         var arc = Math.PI / (this.restaraunts.length / 2);
         this.ctx.clearRect(0, 0, this.cW, this.cH);
         this.ctx.strokeStyle = "#FFBE04";
-        this.ctx.font = '16px Microsoft YaHei';
-        var that=this;
+        this.ctx.font = '12px Microsoft YaHei';
+        var that = this;
         for (var i = 0; i < this.restaraunts.length; i++) {
             var angle = this.startAngle + i * arc;
             this.ctx.fillStyle = (i % 2 == 0) ? "#FFF4D6" : "#FFFFFF";
@@ -46,14 +54,14 @@ var turnplate = {
             if (text.indexOf("M") > 0) {
                 var texts = text.split("M");
                 for (var j = 0; j < texts.length; j++) {
-                    this.ctx.font = j == 0 ? 'bold 20px Microsoft YaHei' : '16px Microsoft YaHei';
+                    this.ctx.font = j == 0 ? 'bold 16px Microsoft YaHei' : '12px Microsoft YaHei';
                     if (j == 0) {
                         this.ctx.fillText(texts[j] + "M", -this.ctx.measureText(texts[j] + "M").width / 2, j * line_height);
                     } else {
                         this.ctx.fillText(texts[j], -this.ctx.measureText(texts[j]).width / 2, j * line_height);
                     }
                 }
-            } else if (text.indexOf("M") == -1 && text.length > 6) { //奖品名称长度超过一定范围 
+            } else if (text.indexOf("M") == -1 && text.length > 6) {
                 text = text.substring(0, 6) + "||" + text.substring(6);
                 var texts = text.split("||");
                 for (var j = 0; j < texts.length; j++) {
@@ -65,15 +73,9 @@ var turnplate = {
             //添加对应图标
             if (text.indexOf("闪币") > 0) {
                 var img = document.getElementById("shan-img");
-                img.onload = function () {
-                    that.ctx.drawImage(img, -15, 10);
-                };
                 this.ctx.drawImage(img, -15, 10);
             } else if (text.indexOf("谢谢参与") >= 0) {
                 var img = document.getElementById("sorry-img");
-                img.onload = function () {
-                    that.ctx.drawImage(img, -15, 10);
-                };
                 this.ctx.drawImage(img, -15, 10);
             }
             this.ctx.restore();
@@ -92,67 +94,67 @@ var turnplate = {
         (function () {
             stats.begin();
             that.aniFrame = requestAnimationFrame(arguments.callee);
-            angles += (rotateAngle - angles) * .01 + .8;
+            angles += Math.ceil((rotateAngle - angles) * .01);
             that.canvas.style.transform = 'rotate(' + angles + 'deg)';
             if (angles >= rotateAngle) {
                 cancelAnimationFrame(that.aniFrame);
                 that.canvas.style.transform = 'rotate(' + rotateAngle + 'deg)';
-                if (fn && (typeof fn == 'function')) oTipBox.show(item, txt);
+                if (fn && (typeof fn == 'function')) fn(item, txt);
             }
             stats.end();
         })();
     },
-    rotate: function (item,fn) {
+    rotate: function (item, fn) {
         if (this.bRotate) return;
         this.bRotate = !this.bRotate;
-        var item = item || rnd(1, this.restaraunts.length);
-        this.rotateFn(item, this.restaraunts[item - 1],fn);
+        var item =  item || this.rnd(1, this.restaraunts.length);
+        this.rotateFn(item, this.restaraunts[item - 1], fn);
+    },
+    rnd: function (n, m) {
+        var random = Math.floor(Math.random() * (m - n + 1) + n);
+        return random;
     }
-}
-window.onload = turnplate.init.bind(turnplate);
-document.addEventListener('DOMContentLoaded', function () {
-    window.stats = new Stats();
-    stats.showPanel(2);
-    document.body.appendChild(stats.dom);
-    document.querySelector('.tipbox .ok').addEventListener('click', function () {
-        oTipBox.hide();
-    }, false);
-}, false);
-
-function rnd(n, m) {
-    var random = Math.floor(Math.random() * (m - n + 1) + n);
-    return random;
 }
 // 提示信息
 var oTipBox = {
+    init: function () {
+        this.tipBox = document.getElementsByClassName('tipbox')[0];
+        this.shade = document.getElementsByClassName('shade')[0];
+        this.ok = this.tipBox.getElementsByClassName('ok')[0];
+        this.width = this.tipBox.offsetWidth;
+        this.height = this.tipBox.offsetHeight;
+        this.ok.addEventListener('click', this.hide.bind(this), false);
+    },
     show: function (index, text) {
         var winWidth = window.innerWidth;
         var winHeight = window.innerHeight;
-        var tipBox = document.getElementsByClassName('tipbox')[0];
-        var shade = document.getElementsByClassName('shade')[0];
-        var p = tipBox.getElementsByTagName('p')[0];
-        var span = tipBox.getElementsByTagName('span')[0];
-        var thisWidth = tipBox.offsetWidth;
-        var thisHeight = tipBox.offsetHeight;
-        tipBox.style.top = (winHeight - thisHeight) / 2 + 'px';
-        tipBox.style.left = (winWidth - thisWidth) / 2 + 'px';
-        shade.style.top = 0;
+        var p = this.tipBox.getElementsByTagName('p')[0];
+        var span = this.tipBox.getElementsByTagName('span')[0];
+        this.tipBox.style.top = (winHeight - this.height) / 2 + 'px';
+        this.tipBox.style.left = (winWidth - this.width) / 2 + 'px';
+        this.shade.style.top = 0;
         p.textContent = text;
         if (index == 3) {
             span.classList.add('no');
         } else {
             span.classList.remove('no');
         }
-        tipBox.classList.add('fadeIn');
-        shade.classList.add('fadeIn');
+        this.tipBox.classList.add('fadeIn');
+        this.shade.classList.add('fadeIn');
     },
     hide: function () {
-        var tipBox = document.getElementsByClassName('tipbox')[0];
-        var shade = document.getElementsByClassName('shade')[0];
-        tipBox.classList.remove('fadeIn');
-        shade.classList.remove('fadeIn');
-        setTimeout(function(){
-            shade.style.top = '5000px';
-        },200)
+        this.tipBox.classList.remove('fadeIn');
+        this.shade.classList.remove('fadeIn');
+        var that = this;
+        setTimeout(function () {
+            that.shade.style.top = '5000px';
+        }, 200)
     }
 }
+window.onload = window.onresize = turnplate.init.bind(turnplate);
+document.addEventListener('DOMContentLoaded', function () {
+    oTipBox.init();
+    window.stats = new Stats();
+    stats.showPanel(0);
+    document.body.appendChild(stats.dom);
+}, false);
